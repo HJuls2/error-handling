@@ -1,0 +1,53 @@
+[
+		{
+			"method": "GET",
+			"url": "",
+			"errors": [
+				{
+					"code": 400,
+					"message": "RICHIESTA ERRATA"
+				}
+			]
+		},
+		{
+			"method": "GET",
+			"url": "https://unathorizedendpoint.free.beeceptor.com",
+			"errors": [
+				{
+					"code": 401,
+					"message": "NON AUTORIZZATO"
+				}
+			]
+		},
+		{
+			"method": "GET",
+			"url" : "https://forbiddenendpoint.free.beeceptor.com",
+			"errors": [
+				{
+					"code": 403,
+					"message": "ACCESSO VIETATO"
+				}
+			]
+		},
+		{
+			"method": "GET",
+			"url": "https://notfoundendpoint.free.beeceptor.com",
+			"errors": [
+				{
+					"code": 404,
+					"message": "NON TROVATO"
+				}
+			]
+		},
+		{
+			"method": "GET",
+			"url": "https://internalservererrorendpoint.free.beeceptor.com",
+			"errors": [
+				{
+					"code": 500,
+					"message": "ERRORE DEL SERVER"
+				}
+			]
+		}
+]
+
