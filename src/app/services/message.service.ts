@@ -1,4 +1,3 @@
-import { skipControl } from './../interceptors/error-handler.interceptor';
 import { HttpClient, HttpContext, HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 

@@ -7,14 +7,11 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpResponse,
-  HttpErrorResponse,
-  HttpContextToken
+  HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-
-export const skipControl = new HttpContextToken(() => false);
 
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {
@@ -25,13 +22,6 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    // Use this to skip control on specific requests
-    if (request.context.get(skipControl)) {
-      return next.handle(request);
-    }
-
-    // Handling for all others requests
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
