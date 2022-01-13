@@ -31,7 +31,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         duration: 5000
       };
       this.snackbar.openFromComponent(ErrorSnackbarComponent, config);
-      return throwError(error);
+      return throwError(() => error); 
     })
     );
   }
