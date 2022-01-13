@@ -4,7 +4,7 @@ Generato con [Angular CLI](https://github.com/angular/angular-cli) versione 13.1
 
 Modulo dimostrativo in cui si realizza un controllo centralizzato della gestione degli errori HTTP tramite *intercettore* Angular.
 
-Oltre a messaggi di errore generici validi per l'intera applicazione, è possibile utilizzare un file JSON (nel formato mostrato nell'esempio nella sezione ...) per definire messaggi di errore relativi a specifiche coppie *endpoint-codice di errore HTTP*.
+Oltre a messaggi di errore generici validi per l'intera applicazione, è possibile utilizzare un file JSON (nel formato mostrato nell'esempio nella sezione [Esempio di file di configurazione JSON](##Esempio-di-file-di-configurazione-JSON) ) per definire messaggi di errore relativi a specifiche coppie *endpoint-codice di errore HTTP*.
 
 ## Requisiti
 
