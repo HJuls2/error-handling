@@ -1,7 +1,7 @@
 [
 		{
 			"method": "GET",
-			"url": "",
+			"url": "https://badrequestendpoint.free.beeceptor.com",
 			"errors": [
 				{
 					"code": 400,

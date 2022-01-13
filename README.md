@@ -1,27 +1,69 @@
 # ErrorHandling
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+Generato con [Angular CLI](https://github.com/angular/angular-cli) versione 13.1.2.
 
-## Development server
+Modulo dimostrativo in cui si realizza un controllo centralizzato della gestione degli errori HTTP tramite *intercettore* Angular.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Oltre a messaggi di errore generici validi per l'intera applicazione, è possibile utilizzare un file JSON (nel formato mostrato nell'esempio nella sezione ...) per definire messaggi di errore relativi a specifiche coppie *endpoint-codice di errore HTTP*.
 
-## Code scaffolding
+## Requisiti
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Angular 6/7+**
+- **Typescript 2.9+**
+- nel file **tsconfig.json**, impostare sotto `compilerOptions` i campi:
 
-## Build
+```typescript
+"resolveJsonModule": true,
+"allowSyntheticDefaultImports": true
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Angular Material**;
 
-## Running unit tests
+## Funzionamento
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Un servizio Angular **`MessageService`** legge ed interpreta il file di configurazione *endpoints.json* posto nella cartella *assets*. L'oggetto ricavato viene organizzato in una mappa utilizzando come chiave la tupla (metodo HTTP, url dell'endpoint, codice di errore) e come valore il messaggio di errore corretto.
 
-## Running end-to-end tests
+Se nel file JSON di configurazione non viene definito uno specifico messaggio di errore per l'endpoint desiderato, vengono usati i messaggi predefiniti (*hard-coded* nel metodo privato **`getBasicErrorMessages(error:HttpErrorResponse):string`**).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Il metodo **`getMessage(request:HttpRequest<any>, error: HttpErrorResponse)`** servizio **`MessageService`** viene invocato dall'intercettore Angular **ErrorHandlerInterceptor** nell'operatore **`catchError`** per recuperare il corretto messaggio da mostrare nella snackbar.
 
-## Further help
+La snackbar è definita dal componente Angular **`ErrorSnackbarComponent`** e si limita a stampare a video per 5 secondi il messaggio ricevuto.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Esempio di file di configurazione JSON
+
+```json
+[
+  {
+   "method": "GET",
+   "url": "URL 1",
+   "errors": [
+    {
+     "code": 400,
+     "message": "RICHIESTA ERRATA per url 1"
+    },
+    {
+     "code": 401,
+     "message": "NON AUTORIZZATO per url 1"
+    }
+   ]
+  },
+  {
+   "method": "GET",
+   "url" : "URL 2",
+   "errors": [
+    {
+     "code": 400,
+     "message": "RICHIESTA ERRATA per url 2"
+    },
+    {
+     "code": 404,
+     "message": "NON TROVATO"
+    },
+    {
+     "code": 500,
+     "message": "ERRORE DEL SERVER"
+    }
+   ]
+  }
+]
+```
