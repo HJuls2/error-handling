@@ -21,6 +21,10 @@ export class ButtonsComponent implements OnInit {
     });
   }
 
+  public fourHundred(): Subscription{
+    return this.fakeApiService.badRequestMethod().subscribe(res => console.log('400'));
+  }
+
   public fourHundredOne(): Subscription{
     return this.fakeApiService.unathorizedMethod().subscribe(res => console.log('401'));
   }
